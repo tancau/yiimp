@@ -523,8 +523,8 @@ if ($coin->id)
         echo "maxconnections=12\n";
         echo "daemon=1\n";
         echo "gen=0\n";
-				echo "server=1\n";
-				echo "listen=1\n";
+	echo "server=1\n";
+	echo "listen=1\n";
         if (empty($coin->specifications))
         {
             echo "\n";
@@ -547,12 +547,12 @@ if ($coin->id)
         echo "' | sudo -E tee {$coin->conf_folder}/$program.conf >/dev/null 2>&1\n";
         echo CHtml::closetag("pre");
 
-				echo CHtml::tag("hr");
+	echo CHtml::tag("hr");
         echo "<b>Open RPC Port on Daemon Server</b>:";
         echo CHtml::opentag("pre");
-				echo "sudo ufw allow from internalipsed to any port {$coin->rpcport}\n";
-				echo '<p class="formHint2">Run on Daemon Server Only.</p>';
-				echo CHtml::closetag("pre");
+	echo "sudo ufw allow from internalipsed to any port {$coin->rpcport}\n";
+	echo '<p class="formHint2">Run on Daemon Server Only.</p>';
+	echo CHtml::closetag("pre");
 
         echo CHtml::tag("hr");
         echo "<b>Add coind to system startup (cron)</b>:";
