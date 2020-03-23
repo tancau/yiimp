@@ -1,6 +1,5 @@
 /*-
- * Copyright 2009 Colin Percival, 2011 ArtForz, 2013 Neisklar, 2014 James Lovejoy
- * All rights reserved.
+ * Copyright(or left) 2019 YiiMP
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
