@@ -4,6 +4,7 @@
 double client_normalize_difficulty(double difficulty)
 {
 	if(difficulty < g_stratum_min_diff) difficulty = g_stratum_min_diff;
+	else if(difficulty <= 0.9) difficulty = 0.001;
 	else if(difficulty < 1) difficulty = floor(difficulty*1000/2)/1000*2;
 	else if(difficulty > 1) difficulty = floor(difficulty/2)*2;
 	if(difficulty > g_stratum_max_diff) difficulty = g_stratum_max_diff;
