@@ -123,7 +123,6 @@ YAAMP_ALGO g_algos[] =
 	{"x15", x15_hash, 1, 0, 0},
 	{"x17", x17_hash, 1, 0, 0},
 	{"x22i", x22i_hash, 1, 0, 0},
-	{"x25x", x25x_hash, 1, 0, 0},
 
 	{"x11evo", x11evo_hash, 1, 0, 0},
 	{"xevan", xevan_hash, 0x100, 0, 0},
@@ -145,7 +144,6 @@ YAAMP_ALGO g_algos[] =
 	{"lyra2v3", lyra2v3_hash, 0x100, 0, 0},
 	{"lyra2z", lyra2z_hash, 0x100, 0, 0},
 	{"lyra2zz", lyra2zz_hash, 0x100, 0, 0},
-	{"lyra2z330", lyra2z330_hash, 0x100, 0, 0},
 
 	{"bastion", bastion_hash, 1, 0 },
 	{"blake", blake_hash, 1, 0 },
