@@ -83,6 +83,9 @@ extern char g_stratum_algo[256];
 extern double g_stratum_difficulty;
 extern double g_stratum_min_diff;
 extern double g_stratum_max_diff;
+extern double g_stratum_nicehash_difficulty;
+extern double g_stratum_nicehash_min_diff;
+extern double g_stratum_nicehash_max_diff;
 
 extern int g_stratum_max_cons;
 extern int g_stratum_max_ttf;
@@ -204,6 +207,7 @@ void sha256_double_hash_hex(const char *input, char *output, unsigned int len);
 #include "algos/skein2.h"
 #include "algos/zr5.h"
 #include "algos/hive.h"
+#include "algos/lyra2vc0ban.h"
 #include "algos/sib.h"
 #include "algos/m7m.h"
 #include "algos/phi.h"
@@ -218,5 +222,6 @@ void sha256_double_hash_hex(const char *input, char *output, unsigned int len);
 #include "algos/aergo.h"
 #include "algos/hex.h"
 #include "algos/argon2d-dyn.h"
+#include "algos/x21s.h"
 #include "algos/exosis.h"
 #include "algos/yespower/yespower.h"
