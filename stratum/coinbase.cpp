@@ -112,10 +112,12 @@ void coinbase_create(YAAMP_COIND *coind, YAAMP_JOB_TEMPLATE *templ, json_value *
         memcpy(timeflip+4,timefield+2,2);
         memcpy(timeflip+6,timefield,2);
 
+	char eversion1[32] = "01000000000000";
+	if(coind->txmessage)
+		strcpy(eversion1, "02000000");
 	const char *coinbase_payload = json_get_string(json_result, "coinbase_payload");
 	if(coinbase_payload && strlen(coinbase_payload) > 0)
-
-	char eversion1[32] = "01000000000000";
+		strcpy(eversion1, "03000500");
 	char script1[4*1024];
 	sprintf(script1, "%s%s%s08", eheight, templ->flags, etime);
 	char script2[32] = "626172727900"; // "barry\0" in hex ascii
