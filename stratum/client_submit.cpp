@@ -98,33 +98,6 @@ void dump_reject(char *reject_block)
 {
         char buffer[65535];
         memset(buffer,'\0',65535);
-static void build_submit_values_decred(YAAMP_JOB_VALUES *submitvalues, YAAMP_JOB_TEMPLATE *templ,
-	const char *nonce1, const char *nonce2, const char *ntime, const char *nonce, const char *vote, bool usegetwork)
-{
-	if (!usegetwork) {
-		// not used yet
-		char doublehash[128] = { 0 };
-
-		sprintf(submitvalues->coinbase, "%s%s%s%s", templ->coinb1, nonce1, nonce2, templ->coinb2);
-		int coinbase_len = strlen(submitvalues->coinbase);
-
-		unsigned char coinbase_bin[1024];
-		memset(coinbase_bin, 0, 1024);
-		binlify(coinbase_bin, submitvalues->coinbase);
-
-		YAAMP_HASH_FUNCTION merkle_hash = sha256_double_hash_hex;
-		if (g_current_algo->merkle_func)
-			merkle_hash = g_current_algo->merkle_func;
-		merkle_hash((char *)coinbase_bin, doublehash, coinbase_len/2);
-
-		string merkleroot = merkle_with_first(templ->txsteps, doublehash);
-		ser_string_be(merkleroot.c_str(), submitvalues->merkleroot_be, 8);
-
-#ifdef MERKLE_DEBUGLOG
-		printf("merkle root %s\n", merkleroot.c_str());
-#endif
-	}
-	create_decred_header(templ, submitvalues, ntime, nonce, nonce2, vote, usegetwork);
 
         if(strlen(reject_block)>65534)
            return;
