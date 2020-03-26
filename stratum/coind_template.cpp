@@ -307,7 +307,7 @@ YAAMP_JOB_TEMPLATE *coind_create_template(YAAMP_COIND *coind)
 	strcpy(templ->prevhash_hex, prev ? prev : "");
 	const char *flags = json_get_string(json_coinbaseaux, "flags");
 	strcpy(templ->flags, flags ? flags : "");
-
+	strcpy(templ->priceinfo, "");
         ///////////////////////////////////////////////////////////////////////////veil////
         strcpy(templ->veil_pofn,json_get_string(json_result, "proofoffullnodehash"));
        	json_value *json_accumhashes = json_get_array(json_result, "accumulatorhashes");
@@ -342,6 +342,13 @@ YAAMP_JOB_TEMPLATE *coind_create_template(YAAMP_COIND *coind)
 		if (claim) {
 			strcpy(templ->claim_hex, claim);
 			debuglog("claim_hex: %s\n", templ->claim_hex);
+		}
+	}
+	else if (strcmp(coind->symbol, "BITC") == 0) {
+		if (strlen(json_get_string(json_result, "priceinfo")) < 1000) {
+			templ->needpriceinfo = json_get_bool(json_result, "needpriceinfo");
+            if (templ->needpriceinfo)
+				strcpy(templ->priceinfo, json_get_string(json_result, "priceinfo"));
 		}
 	}
 
