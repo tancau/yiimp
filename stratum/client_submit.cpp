@@ -444,11 +444,13 @@ bool client_submit(YAAMP_CLIENT *client, json_value *json_params)
 		if (extranull) {
 			debuglog("extranonce %s is empty!, should be %s - %s\n", extranonce2, extra1_id, client->sock->ip);
 			client_submit_error(client, job, 27, "Invalid extranonce2 suffix", extranonce2, ntime, nonce);
+			client->submit_bad++;
 			return true;
 		}
 		if (extradiff) {
 			// some ccminer pre-release doesn't fill correctly the extranonce
 			client_submit_error(client, job, 27, "Invalid extranonce2 suffix", extranonce2, ntime, nonce);
+			client->submit_bad++;
 			socket_send(client->sock, "{\"id\":null,\"method\":\"mining.set_extranonce\",\"params\":[\"%s\",%d]}\n",
 				client->extranonce1, client->extranonce2size);
 			return true;

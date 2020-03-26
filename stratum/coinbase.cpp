@@ -162,7 +162,7 @@ void coinbase_create(YAAMP_COIND *coind, YAAMP_JOB_TEMPLATE *templ, json_value *
 		strcpy(eversion1, "03000500");
 	char script1[4*1024];
 	sprintf(script1, "%s%s%s08", eheight, templ->flags, etime);
-	char script2[32] = "626172727900"; // "barry\0" in hex ascii
+	char script2[32] = "746865706F6F6C2E6C696665"; // "thepool.life" in hex ascii
 	int script_len = 24;
 	sprintf(templ->coinb1, "%s%s01"
 		"0000000000000000000000000000000000000000000000000000000000000000"

@@ -190,6 +190,7 @@ void sha256_double_hash_hex(const char *input, char *output, unsigned int len);
 #include "algos/keccak.h"
 #include "algos/sha256t.h"
 #include "algos/sha256q.h"
+#include "algos/lyra2z330.h"
 #include "algos/skunk.h"
 #include "algos/timetravel.h"
 #include "algos/bitcore.h"
