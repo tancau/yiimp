@@ -187,6 +187,7 @@ YAAMP_ALGO g_algos[] =
 {"lyra2vc0ban", lyra2vc0ban_hash, 0x100, 0, 0},
 	{"penta", penta_hash, 1, 0, 0},
 	{"rainforest", rainforest_hash, 0x100, 0, 0},
+{"sha256d", sha256d_hash, 1, 0, 0}, // sha256 3x
 	{"skein2", skein2_hash, 1, 0, 0},
     {"yespower", yespower_hash, 0x10000, 0, 0},
 	{"yespowerurx", yespowerurx_hash, 0x10000, 0, 0},
