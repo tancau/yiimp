@@ -103,16 +103,16 @@ void coinbase_create(YAAMP_COIND *coind, YAAMP_JOB_TEMPLATE *templ, json_value *
 			unsigned char pricehash_bin[1024];
 			char pricehash_hex[1024];
 			char pricehash_be[1024];
-
+			
 			if (templ->needpriceinfo && strlen(templ->priceinfo) > 0 && strlen(templ->priceinfo) < 1000) {
 				binlify(price_bin, templ->priceinfo);
-
+			
 				int price_len = strlen(templ->priceinfo)/2;
 				sha256_double_hash((char *)price_bin, (char *)pricehash_bin, price_len);
 
 				hexlify(pricehash_hex, pricehash_bin, 32);
 				string_be(pricehash_hex, pricehash_be);
-
+			
 				sprintf(params, "[\"%s\", %i, \"%s\"]", coind->wallet, templ->height, pricehash_be);
 			} else {
 				sprintf(params, "[\"%s\", %i]", coind->wallet, templ->height);
@@ -127,7 +127,7 @@ void coinbase_create(YAAMP_COIND *coind, YAAMP_JOB_TEMPLATE *templ, json_value *
 					sprintf(templ->coinb1, "%s", json_get_string(json_result, "coinbaseforhashpart1"));			
 					templ->coinb1[strlen(templ->coinb1) - 16] = '\0';
 					sprintf(templ->coinb2, "%s", json_get_string(json_result, "coinbaseforhashpart2"));			
-
+					
 					sprintf(templ->coinforsubmitb1, "%s", json_get_string(json_result, "coinbasepart1"));
 					templ->coinforsubmitb1[strlen(templ->coinforsubmitb1) - 16] = '\0';
 					sprintf(templ->coinforsubmitb2, "%s", json_get_string(json_result, "coinbasepart2"));
@@ -137,6 +137,7 @@ void coinbase_create(YAAMP_COIND *coind, YAAMP_JOB_TEMPLATE *templ, json_value *
 		}
 		return;
 	}
+	
 	char eheight[32], etime[32];
 	char entime[32] = { 0 };
 	char commitment[128] = { 0 };
@@ -162,7 +163,7 @@ void coinbase_create(YAAMP_COIND *coind, YAAMP_JOB_TEMPLATE *templ, json_value *
 		strcpy(eversion1, "03000500");
 	char script1[4*1024];
 	sprintf(script1, "%s%s%s08", eheight, templ->flags, etime);
-	char script2[32] = "746865706F6F6C2E6C696665"; // "thepool.life" in hex ascii
+	char script2[32] = "626172727900"; // "barry\0" in hex ascii
 	int script_len = 24;
 	sprintf(templ->coinb1, "%s%s01"
 		"0000000000000000000000000000000000000000000000000000000000000000"

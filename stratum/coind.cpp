@@ -141,10 +141,10 @@ bool coind_validate_address(YAAMP_COIND *coind)
 	}
 
 	bool isvalid = getaddressinfo || json_get_bool(json_result, "isvalid");
-	if(!isvalid) stratumlog("Coin Name: %s wallet %s is not valid.\n", coind->name, coind->account);
+	if(!isvalid) stratumlog("%s wallet %s is not valid.\n", coind->name, coind->wallet);
 
 	bool ismine = json_get_bool(json_result, "ismine");
-	if(!ismine) stratumlog("Coin Name: %s wallet %s is not mine.\n", coind->name, coind->account);
+	if(!ismine) stratumlog("%s wallet %s is not mine.\n", coind->name, coind->wallet);
 	else isvalid = ismine;
 
 	const char *p = json_get_string(json_result, "pubkey");
@@ -154,7 +154,7 @@ bool coind_validate_address(YAAMP_COIND *coind)
 	if (acc) strcpy(coind->account, acc);
 
 	if (!base58_decode(coind->wallet, coind->script_pubkey))
-		stratumlog("Warning: unable to decode %s %s script pubkey\n", coind->symbol, coind->account);
+		stratumlog("Warning: unable to decode %s %s script pubkey\n", coind->symbol, coind->wallet);
 
 	coind->p2sh_address = json_get_bool(json_result, "isscript");
 
@@ -220,7 +220,7 @@ void coind_init(YAAMP_COIND *coind)
 	coind_validate_address(coind);
 	if (strlen(coind->wallet)) {
 		debuglog(">>>>>>>>>>>>>>>>>>>> using wallet %s %s\n",
-			coind->wallet, coind->name);
+			coind->wallet, coind->account);
 	}
 }
 
@@ -271,3 +271,9 @@ void coind_terminate(YAAMP_COIND *coind)
 
 //	coind_terminate(coind);
 //}
+
+
+
+
+
+
