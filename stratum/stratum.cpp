@@ -182,7 +182,8 @@ YAAMP_ALGO g_algos[] =
 	{"penta", penta_hash, 1, 0, 0},
 	{"rainforest", rainforest_hash, 0x100, 0, 0},
 	{"skein2", skein2_hash, 1, 0, 0},
-        {"yespower", yespower_hash, 0x10000, 0, 0},
+    {"yespower", yespower_hash, 0x10000, 0, 0},
+	{"yespowerurx", yespowerurx_hash, 0x10000, 0, 0},
 	{"zr5", zr5_hash, 1, 0, 0},
 
 	{"a5a", a5a_hash, 0x10000, 0, 0},
