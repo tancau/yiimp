@@ -14,8 +14,6 @@ struct YAAMP_JOB_VALUES
 	char header_be[1024];
 	unsigned char header_bin[1024];
 
-        char veilblock[1024];
-
 	char hash_hex[1024];
 	char hash_be[1024];
 	unsigned char hash_bin[1024];
@@ -53,9 +51,6 @@ struct YAAMP_JOB_TEMPLATE
 
 	char coinb1[4*1024];
 	char coinb2[4*1024];
-	char coinforsubmitb1[4*1024];
-	char coinforsubmitb2[4*1024];
-	bool isbitcash;
 
 	char header[256];
 
@@ -64,17 +59,8 @@ struct YAAMP_JOB_TEMPLATE
 	bool has_filtered_txs;
 	int filtered_txs_fee;
 
-	char veil_accum10[128];
-	char veil_accum100[128];
-	char veil_accum1000[128];
-	char veil_accum10000[128];
-	char veil_pofn[128];
-
 	int auxs_size;
 	YAAMP_COIND_AUX *auxs[MAX_AUXS];
-	
-	bool needpriceinfo;
-	char priceinfo[1024];	
 };
 
 #define YAAMP_JOB_MAXSUBIDS		200

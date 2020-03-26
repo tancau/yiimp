@@ -1,13 +1,7 @@
-##########################
-# Credits to the following devs for their work on implementing various algos in to the YiiMP stratum files:
-# tpruvot https://github.com/tpruvot/yiimp
-# barrystyle https://github.com/barrystyle
-# Alexg on Discord
-# And to all the other public repos files have been pulled from.
-##########################
+
 CC=gcc
 
-CFLAGS= -g -march=native -O3
+CFLAGS= -g -march=native
 SQLFLAGS= `mysql_config --cflags --libs`
 
 # Comment this line to disable address check on login,
@@ -69,3 +63,4 @@ install: clean all
 	strip -s stratum
 	cp stratum /usr/local/bin/
 	cp stratum ../bin/
+

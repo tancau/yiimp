@@ -83,9 +83,6 @@ extern char g_stratum_algo[256];
 extern double g_stratum_difficulty;
 extern double g_stratum_min_diff;
 extern double g_stratum_max_diff;
-extern double g_stratum_nicehash_difficulty;
-extern double g_stratum_nicehash_min_diff;
-extern double g_stratum_nicehash_max_diff;
 
 extern int g_stratum_max_cons;
 extern int g_stratum_max_ttf;
@@ -150,7 +147,6 @@ void scrypt_N_R_1_256(const char* input, char* output, uint32_t N, uint32_t R, u
 void sha256_hash_hex(const char *input, char *output, unsigned int len);
 void sha256_double_hash_hex(const char *input, char *output, unsigned int len);
 
-#include "algos/bmw512.h"
 #include "algos/a5a.h"
 #include "algos/c11.h"
 #include "algos/x11.h"
@@ -161,11 +157,9 @@ void sha256_double_hash_hex(const char *input, char *output, unsigned int len);
 #include "algos/x15.h"
 #include "algos/x16r.h"
 #include "algos/x16rv2.h"
-#include "algos/x16rt.h"
 #include "algos/x16s.h"
 #include "algos/x17.h"
 #include "algos/x22i.h"
-#include "algos/x25x.h"
 #include "algos/xevan.h"
 #include "algos/hmq17.h"
 #include "algos/nist5.h"
@@ -190,7 +184,6 @@ void sha256_double_hash_hex(const char *input, char *output, unsigned int len);
 #include "algos/keccak.h"
 #include "algos/sha256t.h"
 #include "algos/sha256q.h"
-#include "algos/lyra2z330.h"
 #include "algos/skunk.h"
 #include "algos/timetravel.h"
 #include "algos/bitcore.h"
@@ -206,15 +199,14 @@ void sha256_double_hash_hex(const char *input, char *output, unsigned int len);
 #include "algos/whirlpool.h"
 #include "algos/whirlpoolx.h"
 #include "algos/skein2.h"
+#include "algos/yescrypt.h"
 #include "algos/zr5.h"
 #include "algos/hive.h"
 #include "algos/sib.h"
 #include "algos/m7m.h"
-#include "algos/lyra2vc0ban.h"
 #include "algos/phi.h"
 #include "algos/phi2.h"
 #include "algos/polytimos.h"
-
 #include "algos/sonoa.h"
 #include "algos/tribus.h"
 #include "algos/veltor.h"
@@ -224,6 +216,4 @@ void sha256_double_hash_hex(const char *input, char *output, unsigned int len);
 #include "algos/aergo.h"
 #include "algos/hex.h"
 #include "algos/argon2d-dyn.h"
-#include "algos/x21s.h"
 #include "algos/exosis.h"
-#include "algos/yespower/yespower.h"
