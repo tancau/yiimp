@@ -207,7 +207,7 @@ void sha256_double_hash_hex(const char *input, char *output, unsigned int len);
 #include "algos/skein2.h"
 #include "algos/zr5.h"
 #include "algos/hive.h"
-#include "algos/lyra2vc0ban.h"
+
 #include "algos/sib.h"
 #include "algos/m7m.h"
 #include "algos/phi.h"
