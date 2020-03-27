@@ -22,7 +22,7 @@ SOURCES=lyra2re.c lyra2v2.c lyra2v3.c Lyra2.c lyra2z.c Lyra2-z.c lyra2zz.c Lyra2
 	hive.c pomelo.c hex.c argon2d-dyn.c \
 	phi.c phi2.c polytimos.c rainforest.c skunk.c sib.c veltor.c gost.c aergo.c lbk3.c yespower/yespower-platform.c yespower/yespower-combined.c
 
-OBJECTS=$(SOURCES:%.c=%.o) $(SOURCES:%.cpp=%.o)$(SOURCES:%.cc=%.o)
+OBJECTS=$(SOURCES:%.c=%.o) $(SOURCES:%.cpp=%.o) $(SOURCES:%.cc=%.o)
 OUTPUT=libalgos.a
 
 all: $(SOURCES) $(OUTPUT)
