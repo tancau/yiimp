@@ -130,6 +130,7 @@ YAAMP_ALGO g_algos[] =
 
 	{"x16r", x16r_hash, 0x100, 0, 0},
 	{"x16rv2", x16rv2_hash, 0x100, 0, 0},
+	{"x16rt", x16rt_hash, 0x100, 0, 0},
 	{"x16s", x16s_hash, 0x100, 0, 0},
 	{"timetravel", timetravel_hash, 0x100, 0, 0},
 	{"bitcore", timetravel10_hash, 0x100, 0, 0},
@@ -301,6 +302,7 @@ int main(int argc, char **argv)
 	struct rlimit rlim_threads = {0x8000, 0x8000};
 	setrlimit(RLIMIT_NPROC, &rlim_threads);
 
+        printf("");
 	stratumlogdate("starting stratum for %s on %s:%d\n",
 		g_current_algo->name, g_tcp_server, g_tcp_port);
 
