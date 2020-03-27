@@ -115,7 +115,8 @@ bool coind_validate_address(YAAMP_COIND *coind)
 	sprintf(params, "[\"%s\"]", coind->wallet);
 
 	json_value *json;
-
+	bool getaddressinfo = false;
+	json = rpc_call(&coind->rpc, "validateaddress", params);
 	if(!json) return false;
 
 	json_value *json_result = json_get_object(json, "result");
@@ -270,7 +271,6 @@ void coind_terminate(YAAMP_COIND *coind)
 
 //	coind_terminate(coind);
 //}
-
 
 
 
