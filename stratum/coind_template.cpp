@@ -309,18 +309,6 @@ YAAMP_JOB_TEMPLATE *coind_create_template(YAAMP_COIND *coind)
 	strcpy(templ->flags, flags ? flags : "");
 	strcpy(templ->priceinfo, "");
 
-        ///////////////////////////////////////////////////////////////////////////veil////
-        strcpy(templ->veil_pofn,json_get_string(json_result, "proofoffullnodehash"));
-       	json_value *json_accumhashes = json_get_array(json_result, "accumulatorhashes");
-        if(json_accumhashes) {
-              	strcpy(templ->veil_accum10,json_get_string(json_accumhashes,"10"));
-                strcpy(templ->veil_accum100,json_get_string(json_accumhashes,"100"));
-                strcpy(templ->veil_accum1000,json_get_string(json_accumhashes,"1000"));
-                strcpy(templ->veil_accum10000,json_get_string(json_accumhashes,"10000"));
-        }
-        ////veil//////////////////////////////////////////////////////////////////////////
-
-
 	// LBC Claim Tree (with wallet gbt patch)
 	const char *claim = json_get_string(json_result, "claimtrie");
 	if (claim) {
@@ -533,7 +521,13 @@ bool coind_create_job(YAAMP_COIND *coind, bool force)
 	CommonLock(&coind->mutex);
 
 	YAAMP_JOB_TEMPLATE *templ;
-	templ = coind_create_template(coind);
+
+	// DCR gbt block header is not compatible with getwork submit, so...
+
+	if (coind->usegetwork && strcmp(coind->rpcencoding, "DCR") == 0)
+		templ = decred_create_worktemplate(coind);
+	else
+		templ = coind_create_template(coind);
 
 	if(!templ)
 	{
@@ -544,7 +538,7 @@ bool coind_create_job(YAAMP_COIND *coind, bool force)
 
 	YAAMP_JOB *job_last = coind->job;
 
-	if(	!force && job_last && job_last->templ && job_last->templ->created + 25 > time(NULL) &&
+	if(	!force && job_last && job_last->templ && job_last->templ->created + 45 > time(NULL) &&
 		templ->height == job_last->templ->height &&
 		templ->txcount == job_last->templ->txcount &&
 		strcmp(templ->coinb2, job_last->templ->coinb2) == 0)
