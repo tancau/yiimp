@@ -25,7 +25,7 @@ void client_record_difficulty(YAAMP_CLIENT *client)
 	client->shares_per_minute = (client->shares_per_minute * (100 - p) + 60*1000*p/e) / 100;
 	client->last_submit_time = current_timestamp();
 
-//	debuglog("client->shares_per_minute %f\n", client->shares_per_minute);
+	debuglog("client->shares_per_minute %f\n", client->shares_per_minute);
 }
 
 void client_change_difficulty(YAAMP_CLIENT *client, double difficulty)
@@ -39,7 +39,6 @@ void client_change_difficulty(YAAMP_CLIENT *client, double difficulty)
 	if(difficulty == client->difficulty_actual) return;
 
 	uint64_t user_target = diff_to_target(difficulty);
-	if(user_target >= YAAMP_MINDIFF && user_target <= YAAMP_MAXDIFF)
 	{
 		client->difficulty_actual = difficulty;
 		client_send_difficulty(client, difficulty);
@@ -53,17 +52,11 @@ void client_adjust_difficulty(YAAMP_CLIENT *client)
 		return;
 	}
 
-	if(client->shares_per_minute > 100)
-		client_change_difficulty(client, client->difficulty_actual*4);
+	if(client->shares_per_minute > 80)
+		client_change_difficulty(client, client->difficulty_actual*1.5);
 
 	else if(client->difficulty_fixed)
 		return;
-
-	else if(client->shares_per_minute > 25)
-		client_change_difficulty(client, client->difficulty_actual*2);
-
-	else if(client->shares_per_minute > 20)
-		client_change_difficulty(client, client->difficulty_actual*1.5);
 
 	else if(client->shares_per_minute <  5)
 		client_change_difficulty(client, client->difficulty_actual/2);
@@ -77,7 +70,7 @@ int client_send_difficulty(YAAMP_CLIENT *client, double difficulty)
 	if(difficulty >= 1)
 		client_call(client, "mining.set_difficulty", "[%.0f]", difficulty);
 	else
-		client_call(client, "mining.set_difficulty", "[%.3f]", difficulty);
+		client_call(client, "mining.set_difficulty", "[%0.8f]", difficulty);
 	return 0;
 }
 
