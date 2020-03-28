@@ -30,13 +30,12 @@
 #ifndef _YESPOWER_H_
 #define _YESPOWER_H_
 
-#ifdef __cplusplus
-extern "C" {
-#endif
 #include <stdint.h>
 #include <stdlib.h> /* for size_t */
 
-
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 /**
  * Internal type used by the memory allocator.  Please do not use it directly.
@@ -125,6 +124,7 @@ extern int yespower_tls(const uint8_t *src, size_t srclen,
     const yespower_params_t *params, yespower_binary_t *dst);
 
 void yespower_hash(const char* input, char* output, uint32_t len);
+void yespowerurx_hash(const char* input, char* output, uint32_t len);
 
 #ifdef __cplusplus
 }

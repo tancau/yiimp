@@ -207,6 +207,7 @@ YAAMP_ALGO g_algos[] =
   {"x25x", x25x_hash, 1, 0, 0},
 	{"xevan", xevan_hash, 0x100, 0, 0},
 	{"yespower", yespower_hash, 0x10000, 0, 0},
+{"yespowerurx", yespowerurx_hash, 0x10000, 0, 0},
 	{"zr5", zr5_hash, 1, 0, 0},
 	{"", NULL, 0, 0},
 };
