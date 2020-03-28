@@ -154,6 +154,7 @@ YAAMP_ALGO g_algos[] =
 	{"lyra2v2", lyra2v2_hash, 0x100, 0, 0},
 	{"lyra2v3", lyra2v3_hash, 0x100, 0, 0},
 	{"lyra2vc0ban", lyra2vc0ban_hash, 0x100, 0, 0},
+{"lyra2z330", lyra2z330_hash, 0x100, 0, 0},
 	{"lyra2z", lyra2z_hash, 0x100, 0, 0},
 	{"lyra2zz", lyra2zz_hash, 0x100, 0, 0},
 	{"m7m", m7m_hash, 0x10000, 0, 0},
