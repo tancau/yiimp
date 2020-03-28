@@ -80,7 +80,6 @@ void base64_encode(char *base64, const char *normal);
 void base64_decode(char *normal, const char *base64);
 
 void ser_number(int n, char *s);
-void ser_compactsize(uint64_t nSize, char *a);
 
 void ser_string_be(const char *input, char *output, int len);
 void ser_string_be2(const char *input, char *output, int len);
@@ -138,6 +137,3 @@ static inline uint32_t bswap32(uint32_t x) {
 	__asm__ __volatile__ ("bswapl %0" : "=r" (x) : "0" (x));
 	return x;
 }
-
-uint64_t share_to_target(double diff);
-

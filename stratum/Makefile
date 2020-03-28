@@ -1,10 +1,4 @@
-##########################
-# Credits to the following devs for their work on implementing various algos in to the YiiMP stratum files:
-# tpruvot https://github.com/tpruvot/yiimp
-# barrystyle https://github.com/barrystyle
-# Alexg on Discord
-# And to all the other public repos files have been pulled from.
-##########################
+
 CC=gcc
 
 CFLAGS= -g -march=native

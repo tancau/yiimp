@@ -27,10 +27,6 @@ void build_submit_values(YAAMP_JOB_VALUES *submitvalues, YAAMP_JOB_TEMPLATE *tem
 
 	string merkleroot = merkle_with_first(templ->txsteps, doublehash);
 	ser_string_be(merkleroot.c_str(), submitvalues->merkleroot_be, 8);
-	
-	if(templ->isbitcash) {
-		sprintf(submitvalues->coinbase, "%s%s%s%s", templ->coinforsubmitb1, nonce1, nonce2, templ->coinforsubmitb2);
-	}
 
 #ifdef MERKLE_DEBUGLOG
 	printf("merkle root %s\n", merkleroot.c_str());
@@ -43,14 +39,7 @@ void build_submit_values(YAAMP_JOB_VALUES *submitvalues, YAAMP_JOB_TEMPLATE *tem
 		sprintf(submitvalues->header, "%s%s%s%s%s%s%s", templ->version, templ->prevhash_be, submitvalues->merkleroot_be,
 			ntime, templ->nbits, nonce, templ->extradata_be);
 		ser_string_be(submitvalues->header, submitvalues->header_be, 36); // 80+64 / sizeof(u32)
-	} else if (templ->needpriceinfo)
-	{
-		sprintf(submitvalues->header, "%s%s%s%s%s%s", templ->version, templ->prevhash_be, submitvalues->merkleroot_be,
-			ntime, templ->nbits, nonce);
-		ser_string_be(submitvalues->header, submitvalues->header_be, 20);
-		sprintf(submitvalues->header_be, "%s%s", submitvalues->header_be, templ->priceinfo);
-	} else
-	{
+	} else {
 		sprintf(submitvalues->header, "%s%s%s%s%s%s", templ->version, templ->prevhash_be, submitvalues->merkleroot_be,
 			ntime, templ->nbits, nonce);
 		ser_string_be(submitvalues->header, submitvalues->header_be, 20);
@@ -278,10 +267,6 @@ static void client_do_submit(YAAMP_CLIENT *client, YAAMP_JOB *job, YAAMP_JOB_VAL
 
 			merkle_hash((char *)submitvalues->header_bin, doublehash2, strlen(submitvalues->header_be)/2);
 
-                        // isnt perfect, but it works
-                        if(strcmp(coind->symbol, "SIN") == 0)
-                           x22i_hash_hex((char *)submitvalues->header_bin, doublehash2, strlen(submitvalues->header_be)/2);
-
 			char hash1[1024];
 			memset(hash1, 0, 1024);
 
@@ -350,6 +335,18 @@ void client_submit_error(YAAMP_CLIENT *client, YAAMP_JOB *job, int id, const cha
 	}
 
 	object_unlock(job);
+}
+
+static bool ntime_valid_range(const char ntimehex[])
+{
+	time_t rawtime = 0;
+	uint32_t ntime = 0;
+	if (strlen(ntimehex) != 8) return false;
+	sscanf(ntimehex, "%8x", &ntime);
+	if (ntime < 0x5b000000 || ntime > 0x60000000) // 14 Jan 2021
+		return false;
+	time(&rawtime);
+	return (abs(rawtime - ntime) < (30 * 60));
 }
 
 static bool valid_string_params(json_value *json_params)
@@ -434,8 +431,8 @@ bool client_submit(YAAMP_CLIENT *client, json_value *json_params)
 
 	if(strcmp(ntime, templ->ntime))
 	{
-		if (!ishexa(ntime, 8)) {
-			client_submit_error(client, job, 23, "Invalid ntime", extranonce2, ntime, nonce);
+		if (!ishexa(ntime, 8) || !ntime_valid_range(ntime)) {
+			client_submit_error(client, job, 23, "Invalid time rolling", extranonce2, ntime, nonce);
 			return true;
 		}
 		// dont allow algos permutations change over time (can lead to different speeds)
