@@ -271,3 +271,9 @@ void coind_terminate(YAAMP_COIND *coind)
 
 //	coind_terminate(coind);
 //}
+
+
+
+
+
+

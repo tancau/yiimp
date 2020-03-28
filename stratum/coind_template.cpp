@@ -605,3 +605,18 @@ bool coind_create_job(YAAMP_COIND *coind, bool force)
 
 	return true;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
