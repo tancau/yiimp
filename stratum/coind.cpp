@@ -115,7 +115,6 @@ bool coind_validate_address(YAAMP_COIND *coind)
 	sprintf(params, "[\"%s\"]", coind->wallet);
 
 	json_value *json;
-
 	bool getaddressinfo = false;
 	json = rpc_call(&coind->rpc, "validateaddress", params);
 	if(!json) return false;
@@ -188,20 +187,12 @@ void coind_init(YAAMP_COIND *coind)
 		//sprintf(account, "default");
 	}
 
-
-
 	bool valid = coind_validate_address(coind);
 	if(valid) return;
-	bool getrawchangeaddress = ((strcmp(coind->symbol,"BTV") == 0) || (strcmp(coind->symbol2, "BTV") == 0));
-	if(getrawchangeaddress) {
+
 	sprintf(params, "[\"legacy\"]", account);
+
 	json_value *json = rpc_call(&coind->rpc, "getrawchangeaddress", params);
-
-	} else {
-	sprintf(params, "[\"%s\"]", account);
-	json_value *json = rpc_call(&coind->rpc, "getaccountaddress", params);
-	}
-
 	if(!json)
 	{
 		json = rpc_call(&coind->rpc, "getaddressesbyaccount", params);
@@ -211,7 +202,7 @@ void coind_init(YAAMP_COIND *coind)
 				json = json->u.object.values[0].value;
 		}
 		if (!json) {
-			stratumlog("ERROR getaddressesbyaccount %s\n", coind->name);
+			stratumlog("ERROR getaccountaddress %s\n", coind->name);
 			return;
 		}
 	}
