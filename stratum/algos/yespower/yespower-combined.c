@@ -1154,15 +1154,3 @@ void yespower_hash(const char* input, char* output, uint32_t len)
     };
     yespower_tls(input, 80, &yespower_1_0_sugarchain, (yespower_binary_t *)output);
 }
-
-void yespowerurx_hash(const char* input, char* output, uint32_t len)
-{
-    yespower_params_t yespower_1_0_uraniumx = {
-        .version = YESPOWER_1_0,
-        .N = 2048,
-        .r = 32,
-        .pers = (const uint8_t *)"UraniumX",
-        .perslen = 8
-    };
-    yespower_tls( input, 80, &yespower_1_0_uraniumx, (yespower_binary_t *)output);
-}
