@@ -116,11 +116,11 @@ bool coind_validate_address(YAAMP_COIND *coind)
 
 	json_value *json;
 
-	bool is_btv = ((strcmp(coind->symbol,"BTV") == 0) || (strcmp(coind->symbol2, "BTV") == 0));
-	if (is_btv) {
+	if((strcmp(coind->symbol,"BTV") == 0) || (strcmp(coind->symbol2, "BTV") == 0));
+		{
         if (json) json_value_free(json);
-
-        json = rpc_call(&coind->rpc, "getnewaddress", params);
+				sprintf(params, "[\"%s\"]", account);
+				json = rpc_call(&coind->rpc, "validateaddress", params);
     }
 
 
