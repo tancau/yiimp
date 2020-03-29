@@ -187,6 +187,12 @@ void coind_init(YAAMP_COIND *coind)
 		//sprintf(account, "default");
 	}
 
+	strcpy(account, coind->account);
+	if(!strcmp(coind->rpcencoding, "BTV")) {
+		coind->usegetwork = true;
+		//sprintf(account, "default");
+	}
+
 	bool valid = coind_validate_address(coind);
 	if(valid) return;
 
@@ -271,9 +277,3 @@ void coind_terminate(YAAMP_COIND *coind)
 
 //	coind_terminate(coind);
 //}
-
-
-
-
-
-
