@@ -135,7 +135,7 @@ YAAMP_ALGO g_algos[] =
 	{"lyra2v2", lyra2v2_hash, 0x100, 0, 0},
 	{"lyra2v3", lyra2v3_hash, 0x100, 0, 0},
 	{"lyra2vc0ban", lyra2vc0ban_hash, 0x100, 0, 0},
-{"lyra2z330", lyra2z330_hash, 0x100, 0, 0},
+	{"lyra2z330", lyra2z330_hash, 0x100, 0, 0},
 	{"lyra2z", lyra2z_hash, 0x100, 0, 0},
 	{"lyra2zz", lyra2zz_hash, 0x100, 0, 0},
 	{"m7m", m7m_hash, 0x10000, 0, 0},
@@ -183,7 +183,7 @@ YAAMP_ALGO g_algos[] =
 	{"x16rt", x16rt_hash, 0x100, 0, 0},
 	{"x16s", x16s_hash, 0x100, 0, 0},
 	{"x17", x17_hash, 1, 0, 0},
-{"x17r", x17r_hash, 1, 0, 0},	//ufo-project
+	{"x17r", x17r_hash, 1, 0, 0},	//ufo-project
 	{"x18", x18_hash, 1, 0, 0},
 	{"x20r", x20r_hash, 0x100, 0, 0},
 	{"x21s", x21s_hash, 0x100, 0, 0},
@@ -191,7 +191,7 @@ YAAMP_ALGO g_algos[] =
   {"x25x", x25x_hash, 1, 0, 0},
 	{"xevan", xevan_hash, 0x100, 0, 0},
 	{"yespower", yespower_hash, 0x10000, 0, 0},
-{"yespowerurx", yespowerurx_hash, 0x10000, 0, 0},
+	{"yespowerurx", yespowerurx_hash, 0x10000, 0, 0},
 	{"zr5", zr5_hash, 1, 0, 0},
 	{"", NULL, 0, 0},
 };
