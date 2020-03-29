@@ -117,7 +117,7 @@ bool coind_validate_address(YAAMP_COIND *coind)
 	json_value *json;
 
 
-	bool getaddressinfo = false || (strcmp(coind->symbol, "BTCV") == 0) || (strcmp(coind->symbol2, "BTCV") == 0);
+	bool getaddressinfo = false || (strcmp(coind->symbol, "BTV") == 0) || (strcmp(coind->symbol2, "BTV") == 0);
 	json = rpc_call(&coind->rpc, "validateaddress", params);
 	if(!json) return false;
 
