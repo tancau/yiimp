@@ -116,14 +116,6 @@ bool coind_validate_address(YAAMP_COIND *coind)
 
 	json_value *json;
 
-	if((strcmp(coind->symbol,"BTV") == 0) || (strcmp(coind->symbol2, "BTV") == 0));
-		{
-        if (json) json_value_free(json);
-				sprintf(params, "[\"%s\"]", account);
-				json = rpc_call(&coind->rpc, "validateaddress", params);
-    }
-
-
 	bool getaddressinfo = false;
 	json = rpc_call(&coind->rpc, "validateaddress", params);
 	if(!json) return false;
@@ -211,7 +203,7 @@ void coind_init(YAAMP_COIND *coind)
 				json = json->u.object.values[0].value;
 		}
 		if (!json) {
-			stratumlog("ERROR getaccountaddress %s\n", coind->name);
+			stratumlog("ERROR getaddressesbyaccount %s\n", coind->name);
 			return;
 		}
 	}
