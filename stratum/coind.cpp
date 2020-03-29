@@ -115,7 +115,9 @@ bool coind_validate_address(YAAMP_COIND *coind)
 	sprintf(params, "[\"%s\"]", coind->wallet);
 
 	json_value *json;
-	bool getaddressinfo = false;
+
+
+	bool getaddressinfo = false || (strcmp(coind->symbol, "BTCV") == 0) || (strcmp(coind->symbol2, "BTCV") == 0);
 	json = rpc_call(&coind->rpc, "validateaddress", params);
 	if(!json) return false;
 
@@ -183,12 +185,6 @@ void coind_init(YAAMP_COIND *coind)
 
 	strcpy(account, coind->account);
 	if(!strcmp(coind->rpcencoding, "DCR")) {
-		coind->usegetwork = true;
-		//sprintf(account, "default");
-	}
-
-	strcpy(account, coind->account);
-	if(!strcmp(coind->rpcencoding, "BTV")) {
 		coind->usegetwork = true;
 		//sprintf(account, "default");
 	}
