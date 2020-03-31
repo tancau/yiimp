@@ -278,6 +278,11 @@ static void client_do_submit(YAAMP_CLIENT *client, YAAMP_JOB *job, YAAMP_JOB_VAL
 
 			merkle_hash((char *)submitvalues->header_bin, doublehash2, strlen(submitvalues->header_be)/2);
 
+			char hash1[1024];
+			memset(hash1, 0, 1024);
+
+			string_be(doublehash2, hash1);
+
 			if(coind->usegetwork && !strcmp("DCR", coind->rpcencoding)) {
 				// no merkle stuff
 				strcpy(hash1, submitvalues->hash_hex);
