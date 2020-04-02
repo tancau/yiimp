@@ -1376,7 +1376,6 @@ void coinbase_create(YAAMP_COIND *coind, YAAMP_JOB_TEMPLATE *templ, json_value *
 	if(strcmp(coind->symbol, "DEM") == 0){if(coind->txmessage){strcat(templ->coinb2, "00");}} //fixes eMark.
   if(strcmp(coind->symbol, "FLO") == 0){if(coind->txmessage){strcat(templ->coinb2, "00");}} //fixes FlorinCoin
 	if(strcmp(coind->symbol, "GIO") == 0){if(coind->txmessage){strcat(templ->coinb2, "00");}} //fixes GravioCoin
-	if(strcmp(coind->symbol, "SUGAR") == 0){if(coind->txmessage){strcat(templ->coinb2, "00");}} //fixes GravioCoin
 	strcat(templ->coinb2, "00000000"); // locktime
 
 	coind->reward = (double)available/100000000*coind->reward_mul;
