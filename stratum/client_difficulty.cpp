@@ -52,8 +52,8 @@ void client_adjust_difficulty(YAAMP_CLIENT *client)
 		return;
 	}
 
-	if(client->shares_per_minute > 100)
-		client_change_difficulty(client, client->difficulty_actual*4);
+	if(client->shares_per_minute > 80)
+		client_change_difficulty(client, client->difficulty_actual*1.5);
 
 	else if(client->difficulty_fixed)
 		return;
@@ -61,9 +61,8 @@ void client_adjust_difficulty(YAAMP_CLIENT *client)
 	else if(client->shares_per_minute > 25)
 		client_change_difficulty(client, client->difficulty_actual*2);
 
-	else if(client->shares_per_minute > 20)
+	else if(client->shares_per_minute > 10)
 		client_change_difficulty(client, client->difficulty_actual*1.5);
-
 	else if(client->shares_per_minute <  5)
 		client_change_difficulty(client, client->difficulty_actual/2);
 }
@@ -97,3 +96,9 @@ void client_initialize_difficulty(YAAMP_CLIENT *client)
 	}
 
 }
+
+
+
+
+
+
