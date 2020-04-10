@@ -234,6 +234,28 @@ void coinbase_create(YAAMP_COIND *coind, YAAMP_JOB_TEMPLATE *templ, json_value *
 				//debuglog("%s dynode found %s %u\n", coind->symbol, payee, amount);
 			}
 		}
+		else if (xnode_enabled && xnode) {
+			bool started;
+			started = json_get_bool(json_result, "xnode_payments_started");
+			const char *payee = json_get_string(xnode, "payee");
+			json_int_t amount = json_get_int(xnode, "amount");
+			if (!payee)
+				debuglog("coinbase_create failed to get xnode payee\n");
+
+			if (!amount)
+				debuglog("coinbase_create failed to get xnode amount\n");
+
+			if (!started)
+				debuglog("coinbase_create failed to get xnode started\n");
+
+			if (payee && amount && started) {
+				npayees++;
+				available -= amount;
+				base58_decode(payee, script_payee);
+				job_pack_tx(coind, script_dests, amount, script_payee);
+				debuglog("%s xnode found %s %u\n", coind->symbol, payee, amount);
+			}
+		}
 		sprintf(payees, "%02x", npayees);
 		strcat(templ->coinb2, payees);
 		if (templ->has_segwit_txs) strcat(templ->coinb2, commitment);
