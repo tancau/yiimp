@@ -234,7 +234,33 @@ void coinbase_create(YAAMP_COIND *coind, YAAMP_JOB_TEMPLATE *templ, json_value *
 				//debuglog("%s dynode found %s %u\n", coind->symbol, payee, amount);
 			}
 		}
-		else if (xnode_enabled && xnode) {
+		sprintf(payees, "%02x", npayees);
+		strcat(templ->coinb2, payees);
+		if (templ->has_segwit_txs) strcat(templ->coinb2, commitment);
+		strcat(templ->coinb2, script_dests);
+		job_pack_tx(coind, templ->coinb2, available, NULL);
+		strcat(templ->coinb2, "00000000"); // locktime
+		coind->reward = (double)available/100000000*coind->reward_mul;
+		//debuglog("%s %d dests %s\n", coind->symbol, npayees, script_dests);
+		return;
+	}
+
+	else if(strcmp(coind->symbol, "GXX") == 0)
+	{
+		char script_dests[2048] = { 0 };
+		char script_payee[128] = { 0 };
+		char payees[3];
+		int npayees = (templ->has_segwit_txs) ? 2 : 1;
+		bool xnode_enabled;
+		xnode_enabled = json_get_bool(json_result, "xnode_payments_enforced");
+		json_value* xnode;
+		xnode = json_get_object(json_result, "xnode");
+		if(!xnode && json_get_bool(json_result, "xnode_payments")) {
+			coind->oldmasternodes = true;
+			debuglog("%s is using old xnodes rpc keys\n", coind->symbol);
+			return;
+		}
+		if (xnode_enabled && xnode) {
 			bool started;
 			started = json_get_bool(json_result, "xnode_payments_started");
 			const char *payee = json_get_string(xnode, "payee");
