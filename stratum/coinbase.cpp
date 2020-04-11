@@ -279,7 +279,7 @@ void coinbase_create(YAAMP_COIND *coind, YAAMP_JOB_TEMPLATE *templ, json_value *
 				available -= amount;
 				base58_decode(payee, script_payee);
 				job_pack_tx(coind, script_dests, amount, script_payee);
-				debuglog("%s xnode found %s %u\n", coind->symbol, payee, amount);
+				//debuglog("%s xnode found %s %u\n", coind->symbol, payee, amount);
 			}
 		}
 		sprintf(payees, "%02x", npayees);
@@ -706,7 +706,7 @@ void coinbase_create(YAAMP_COIND *coind, YAAMP_JOB_TEMPLATE *templ, json_value *
 			job_pack_tx(coind, script_dests, amount, script_payee);
 		}
 	}
-	json_value* masternode = json_get_object(json_result, "masternode");
+	json_value* masternode = json_get_object(json_result, "indexnode");
 	bool masternode_enabled = json_get_bool(json_result, "masternode_payments_enforced");
 	if (masternode_enabled && masternode)
 	{
