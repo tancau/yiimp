@@ -706,13 +706,13 @@ void coinbase_create(YAAMP_COIND *coind, YAAMP_JOB_TEMPLATE *templ, json_value *
 			job_pack_tx(coind, script_dests, amount, script_payee);
 		}
 	}
-	json_value* masternode = json_get_object(json_result, "indexnode");
-	bool masternode_enabled = json_get_bool(json_result, "masternode_payments_enforced");
-	if (masternode_enabled && masternode)
+	json_value* indexnode = json_get_object(json_result, "indexnode");
+	bool indexnode_enabled = json_get_bool(json_result, "indexnode_payments_enforced");
+	if (indexnode_enabled && indexnode)
 	{
-		bool started = json_get_bool(json_result, "masternode_payments_started");
-		const char *payee = json_get_string(masternode, "payee");
-		json_int_t amount = json_get_int(masternode, "amount");
+		bool started = json_get_bool(json_result, "indexnode_payments_started");
+		const char *payee = json_get_string(indexnode, "payee");
+		json_int_t amount = json_get_int(indexnode, "amount");
 		if (started && payee && amount) {
 			char script_payee[128] = { 0 };
 			npayees++;
