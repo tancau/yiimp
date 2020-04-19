@@ -39,6 +39,7 @@ void client_change_difficulty(YAAMP_CLIENT *client, double difficulty)
 	if(difficulty == client->difficulty_actual) return;
 
 	uint64_t user_target = diff_to_target(difficulty);
+	if(user_target >= YAAMP_MINDIFF && user_target <= YAAMP_MAXDIFF)
 	{
 		client->difficulty_actual = difficulty;
 		client_send_difficulty(client, difficulty);
@@ -103,3 +104,9 @@ void client_initialize_difficulty(YAAMP_CLIENT *client)
 	}
 
 }
+
+
+
+
+
+
