@@ -3,16 +3,6 @@
 
 bool client_suggest_difficulty(YAAMP_CLIENT *client, json_value *json_params)
 {
-	if(json_params->u.array.length>0)
-	{
-		double diff = client_normalize_difficulty(json_params->u.array.values[0]->u.dbl);
-		uint64_t user_target = diff_to_target(diff);
-
-		if(user_target >= YAAMP_MINDIFF && user_target <= YAAMP_MAXDIFF)
-			client->difficulty_actual = diff;
-	}
-
-	client_send_result(client, "true");
 	return false;
 }
 
