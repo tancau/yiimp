@@ -13,13 +13,12 @@ bool client_suggest_difficulty(YAAMP_CLIENT *client, json_value *json_params)
 	}
 
 	client_send_result(client, "true");
-	return true;
+	return false;
 }
 
 bool client_suggest_target(YAAMP_CLIENT *client, json_value *json_params)
 {
-	client_send_result(client, "true");
-	return true;
+	return false;
 }
 
 bool client_subscribe(YAAMP_CLIENT *client, json_value *json_params)

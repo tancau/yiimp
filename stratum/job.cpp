@@ -299,13 +299,7 @@ void job_update()
 		YAAMP_CLIENT *client = (YAAMP_CLIENT *)li->data;
 		if(client->deleted) continue;
 		if(client->jobid_next) continue;
-
-		debuglog("clients with no job\n");
-		g_current_algo->overflow = true;
-
-		if(!g_list_coind.first) break;
-
-		// here: todo: choose first can mine
+                if(!g_list_coind.first) break;
 
 		YAAMP_COIND *coind = (YAAMP_COIND *)g_list_coind.first->data;
 		if(!coind) break;

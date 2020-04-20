@@ -103,7 +103,7 @@ void job_broadcast(YAAMP_JOB *job)
 	int count = 0;
 	struct timeval timeout;
 	timeout.tv_sec = 0;
-	timeout.tv_usec = 100000; // max time to push to a socket (very fast)
+	timeout.tv_usec = 50000; // max time to push to a socket (very fast)
 
 	YAAMP_JOB_TEMPLATE *templ = job->templ;
 
@@ -125,6 +125,7 @@ void job_broadcast(YAAMP_JOB *job)
 		client_add_job_history(client, job->id);
 
 		client_adjust_difficulty(client);
+		client->last_submit_time = current_timestamp();
 
 		setsockopt(client->sock->sock, SOL_SOCKET, SO_SNDTIMEO, &timeout, sizeof(timeout));
 

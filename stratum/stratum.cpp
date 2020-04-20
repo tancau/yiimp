@@ -390,7 +390,7 @@ void *monitor_thread(void *p)
 
 	while(!g_exiting)
 	{
-		sleep(0.2);
+		sleep(1/3);
 
 		g_list_coind.Enter();
 		for(CLI li = g_list_coind.first; li; li = li->next)
@@ -402,7 +402,7 @@ void *monitor_thread(void *p)
 
 			if (coind->height != amount) {
                                 if (coind->height != cacheHeight) {
-				      debuglog("coind->height differs from rpc response, forcing new template (%d vs %d)..\n", coind->height, amount);
+				      //debuglog("coind->height differs from rpc response, forcing new template (%d vs %d)..\n", coind->height, amount);
                                       cacheHeight = coind->height;
                                 }
 				coind_create_job(coind, true);

@@ -188,7 +188,7 @@ void db_update_workers(YAAMP_DB *db)
 			continue;
 		}
 
-		client->speed *= 0.8;
+		client->speed *= 0.9;
 		if(client->difficulty_written == client->difficulty_actual) continue;
 
 		db_query(db, "UPDATE workers SET difficulty=%f, subscribe=%d WHERE id=%d",

@@ -559,18 +559,6 @@ bool coind_create_job(YAAMP_COIND *coind, bool force)
 	int height = coind->height;
 	coind->height = templ->height-1;
 
-	if(height > coind->height)
-	{
-		stratumlog("%s went from %d to %d\n", coind->name, height, coind->height);
-	//	coind->auto_ready = false;
-	}
-
-	if(height < coind->height && !coind->newblock)
-	{
-		if(coind->auto_ready && coind->notreportingcounter++ > 5)
-			stratumlog("%s %d not reporting\n", coind->name, coind->height);
-	}
-
 	uint64_t coin_target = decode_compact(templ->nbits);
 	if (templ->nbits && !coin_target) coin_target = 0xFFFF000000000000ULL; // under decode_compact min diff
 	coind->difficulty = target_to_diff(coin_target);
